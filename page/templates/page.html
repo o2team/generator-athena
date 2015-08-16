@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- S 预解析DNS列表 -->
+  <link rel="dns-prefetch" href="//<%= pageConf.secondaryDomain %>.paipaiimg.com">
+  <!-- E 预解析DNS列表 -->
+
+  <!-- S 引用前端页面片 -->
+  <!--#include virtual="/sinclude/cssi/fd/h5/<%= pageConf.appName %>/<%= pageConf.modName %>/<%= pageConf.pageName %>.shtml" -->
+  <!-- E 引用前端页面片 -->
+
+  <link rel="stylesheet" type="text/css" href="../<%= pageConf.commonModule %>/css/<%= pageConf.commonModule %>.css" combo-use="/<%= pageConf.commonModule %>/css/<%= pageConf.commonModule %>.min.css" />
+  <!-- endglobal -->
+
+  <!-- combo:css <%= pageConf.pageName %> -->
+  <!-- endcombo -->
+</head>
+<!-- 注：加ontouchstart使css：active生效 -->
+<body>
+
+  <div class="mod_container">
+
+  </div>
+
+  <!-- global:js -->
+  <!-- endglobal -->
+
+  <!-- combo:js <%= pageConf.pageName %> -->
+  <!-- endcombo -->
+</body>
+</html>
