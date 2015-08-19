@@ -80,8 +80,22 @@ module.exports = yeoman.generators.Base.extend({
     process.chdir(this.conf.appName);
     this.npmInstall();
     this.on('end', function () {
-      var talkText = 'yo yo 文件已经生成好啦~~\n';
-      this.log(chalk.green(talkText) + chalk.white('You are ready to go') + '\n' + chalk.green('HAPPY CODING \\(^____^)/'));
+      //自动拉取gulp相关task
+      var sys = require('sys');
+      var exec = require('child_process').exec;
+      var child;      
+      var execName = 'fetch';
+      child = exec(execName, function( error, stdout, stderr ){
+        sys.print( 'stdout: ' + stdout );
+        sys.print( 'stderr: ' + stderr );
+        if( error !== null ){
+          this.log( 'exec error: ' + error );          
+        }else {
+          var talkText = 'yo yo 文件已经生成好啦~~\n';
+          this.log(chalk.green(talkText) + chalk.white('You are ready to go') + '\n' + chalk.green('HAPPY CODING \\(^____^)/'));
+        }
+      }.bind(this));
+      
     }.bind(this));
   }
 });
