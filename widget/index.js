@@ -66,6 +66,12 @@ module.exports = yeoman.generators.Base.extend({
     }
     prompts.push({
       type: 'input',
+      name: 'description',
+      message: '这个widget是用来干嘛的呢~~',
+      store: false
+    });
+    prompts.push({
+      type: 'input',
       name: 'author',
       message: '雁过留声，人过留名~~',
       default: this.user.git.name() || process.env.USER,
@@ -94,6 +100,7 @@ module.exports = yeoman.generators.Base.extend({
       this.copy('widget.html', 'widget/' + widgetName + '/' + widgetName + '.html');
       this.copy('widget.css', 'widget/' + widgetName + '/' + widgetName + '.css');
       this.copy('widget.js', 'widget/' + widgetName + '/' + widgetName + '.js');
+      this.copy('widget.json', 'widget/' + widgetName + '/' + widgetName + '.json');
     }
   },
   end: function() {

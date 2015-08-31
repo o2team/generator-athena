@@ -63,10 +63,23 @@ module.exports = yeoman.generators.Base.extend({
       this.mkdir(commonModule + '/static/images');
       this.mkdir(commonModule + '/static/js');
       this.mkdir(commonModule + '/widget');
+      this.mkdir(commonModule + '/page/gb');
 
-      this.copy('_gb.css', commonModule + '/static/css/base.css');
+      this.copy('_gb.css', commonModule + '/page/gb/gb.css');
+      this.copy('_gb.js', commonModule + '/page/gb/gb.js');
+      this.fs.copyTpl(
+        this.templatePath('_gb.html'),
+        this.destinationPath(commonModule + '/page/gb/gb.html'),
+        this,
+        {
+          escape: /<\$-([\s\S]+?)\$>/g,
+          evaluate: /<\$([\s\S]+?)\$>/g,
+          interpolate: /<\$=([\s\S]+?)\$>/g
+        }
+      );
       this.copy('_module-conf.js', commonModule + '/module-conf.js');
       this.copy('_module_gulp.js', commonModule + '/gulpfile.js');
+      this.copy('_static-conf.js', commonModule + '/static-conf.js');
 
       this.copy('_package.json', conf.appName + '/package.json');
       this.copy('_gulpfile.js', conf.appName + '/gulpfile.js');
@@ -83,19 +96,19 @@ module.exports = yeoman.generators.Base.extend({
       //自动拉取gulp相关task
       var sys = require('sys');
       var exec = require('child_process').exec;
-      var child;      
+      var child;
       var execName = 'fetch';
       child = exec(execName, function( error, stdout, stderr ){
         sys.print( 'stdout: ' + stdout );
         sys.print( 'stderr: ' + stderr );
         if( error !== null ){
-          this.log( 'exec error: ' + error );          
+          this.log( 'exec error: ' + error );
         }else {
           var talkText = 'yo yo 文件已经生成好啦~~\n';
           this.log(chalk.green(talkText) + chalk.white('You are ready to go') + '\n' + chalk.green('HAPPY CODING \\(^____^)/'));
         }
       }.bind(this));
-      
+
     }.bind(this));
   }
 });

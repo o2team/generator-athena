@@ -74,18 +74,27 @@ module.exports = yeoman.generators.Base.extend({
         }.bind(this)
       });
     }
+
+    prompts.push({
+      type: 'confirm',
+      name: 'isTencent',
+      message: '是否腾讯域下',
+      default: true
+    });
+
+    prompts.push({
+      type: 'input',
+      name: 'description',
+      message: '这个页面是用来干嘛的呢？',
+      store: false
+    });
+
     prompts.push({
       type: 'input',
       name: 'author',
       message: '雁过留声，人过留名~~',
       default: this.user.git.name() || process.env.USER,
       store: true
-    });
-    prompts.push({
-      type: 'confirm',
-      name: 'isTencent',
-      message: '是否腾讯域下',
-      default: true
     });
 
     this.prompt(prompts, function(anwsers) {
@@ -111,10 +120,20 @@ module.exports = yeoman.generators.Base.extend({
       var pageConf = this.pageConf;
       var pageName = pageConf.pageName;
       this.mkdir('page/' + pageName);
-
-      this.copy('page.html', 'page/' + pageName + '/' + pageName + '.html');
+      this.mkdir('page/' + pageName + '/images');
+      this.fs.copyTpl(
+        this.templatePath('page.html'),
+        this.destinationPath('page/' + pageName + '/' + pageName + '.html'),
+        this,
+        {
+          escape: /<\$-([\s\S]+?)\$>/g,
+          evaluate: /<\$([\s\S]+?)\$>/g,
+          interpolate: /<\$=([\s\S]+?)\$>/g
+        }
+      );
       this.copy('page.css', 'page/' + pageName + '/' + pageName + '.css');
       this.copy('page.js', 'page/' + pageName + '/' + pageName + '.js');
+      this.copy('page.json', 'page/' + pageName + '/' + pageName + '.json');
     }
   },
   end: function() {

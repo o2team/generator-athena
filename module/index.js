@@ -101,7 +101,8 @@ module.exports = yeoman.generators.Base.extend({
 
       this.copy('_module-conf.js', conf.moduleName + '/module-conf.js');
       this.copy('_gulpfile.js', conf.moduleName + '/gulpfile.js');
-    
+      this.copy('_static-conf.js', conf.moduleName + '/static-conf.js');
+
       var appConfPath = this.destinationPath('app-conf.js');
       var appConf = require(appConfPath);
       var appConfFile = fs.readFileSync(appConfPath);
@@ -124,7 +125,7 @@ module.exports = yeoman.generators.Base.extend({
     //自动拉取gulp相关task
     var sys = require('sys');
     var exec = require('child_process').exec;
-    var child;      
+    var child;
     var execName = 'fetch';
     child = exec(execName, function( error, stdout, stderr ){
       sys.print( 'stdout: ' + stdout );
@@ -136,6 +137,6 @@ module.exports = yeoman.generators.Base.extend({
         this.log(chalk.green(talkText) + chalk.white('You are ready to go') + '\n' + chalk.green('HAPPY CODING \\(^____^)/'));
       }
     }.bind(this));
-    
+
   }
 });
