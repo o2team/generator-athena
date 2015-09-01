@@ -97,7 +97,16 @@ module.exports = yeoman.generators.Base.extend({
       this.mkdir('widget/' + widgetName);
       this.mkdir('widget/' + widgetName + '/images');
 
-      this.copy('widget.html', 'widget/' + widgetName + '/' + widgetName + '.html');
+      this.fs.copyTpl(
+        this.templatePath('widget.html'),
+        this.destinationPath('widget/' + widgetName + '/' + widgetName + '.html'),
+        this,
+        {
+          escape: /<\$-([\s\S]+?)\$>/g,
+          evaluate: /<\$([\s\S]+?)\$>/g,
+          interpolate: /<\$=([\s\S]+?)\$>/g
+        }
+      );
       this.copy('widget.css', 'widget/' + widgetName + '/' + widgetName + '.css');
       this.copy('widget.js', 'widget/' + widgetName + '/' + widgetName + '.js');
       this.copy('widget.json', 'widget/' + widgetName + '/' + widgetName + '.json');
