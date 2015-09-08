@@ -18,7 +18,7 @@ module.exports = yeoman.generators.Base.extend({
     this.log(yosay(
       chalk.cyan('拍拍无线页面构建脚手架')
     ));
-    this.log('need help? go and open issue: https://github.com/luckyadam/generator-athena/issues/new');
+    this.log('need help? go and open issue: https://github.com/JDC-FD/generator-athena/issues/new');
     this.conf = {};
     this.pkg = require('../package.json');
   },
